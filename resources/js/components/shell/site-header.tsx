@@ -28,16 +28,20 @@ export default function SiteHeader() {
                 />
 
                 <div className="hidden items-center gap-2 md:flex">
-                    <Button variant="ghost" size="sm" asChild>
-                        <Link href={accountNav[0].href}>
-                            {accountNav[0].label}
-                        </Link>
-                    </Button>
-                    <Button size="sm" asChild>
-                        <Link href={accountNav[1].href}>
-                            {accountNav[1].label}
-                        </Link>
-                    </Button>
+                    {accountNav.map((item, position) => (
+                        <Button
+                            key={item.label}
+                            variant={
+                                position === accountNav.length - 1
+                                    ? 'default'
+                                    : 'ghost'
+                            }
+                            size="sm"
+                            asChild
+                        >
+                            <Link href={item.href}>{item.label}</Link>
+                        </Button>
+                    ))}
                 </div>
 
                 <Sheet open={open} onOpenChange={setOpen}>
@@ -62,22 +66,24 @@ export default function SiteHeader() {
                                 onNavigate={() => setOpen(false)}
                             />
                             <div className="flex flex-col gap-2">
-                                <Button variant="outline" asChild>
-                                    <Link
-                                        href={accountNav[0].href}
-                                        onClick={() => setOpen(false)}
+                                {accountNav.map((item, position) => (
+                                    <Button
+                                        key={item.label}
+                                        variant={
+                                            position === accountNav.length - 1
+                                                ? 'default'
+                                                : 'outline'
+                                        }
+                                        asChild
                                     >
-                                        {accountNav[0].label}
-                                    </Link>
-                                </Button>
-                                <Button asChild>
-                                    <Link
-                                        href={accountNav[1].href}
-                                        onClick={() => setOpen(false)}
-                                    >
-                                        {accountNav[1].label}
-                                    </Link>
-                                </Button>
+                                        <Link
+                                            href={item.href}
+                                            onClick={() => setOpen(false)}
+                                        >
+                                            {item.label}
+                                        </Link>
+                                    </Button>
+                                ))}
                             </div>
                         </div>
                     </SheetContent>

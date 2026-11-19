@@ -1,0 +1,18 @@
+<?php
+
+namespace Database\Seeders;
+
+use App\Models\Contract;
+use Illuminate\Database\Seeder;
+
+class ContractSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     */
+    public function run(): void
+    {
+        Contract::factory()->count(42)->create();
+        Contract::factory()->unpublished()->count(5)->create();
+    }
+}
